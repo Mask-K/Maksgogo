@@ -8,7 +8,6 @@ namespace Maksgogo
     {
         public User()
         {
-            OrderCarts = new HashSet<OrderCart>();
             User_has_films = new HashSet<User_has_film>();
 
         }
@@ -18,7 +17,6 @@ namespace Maksgogo
         public string? Email { get; set; }
         public string? Session { get; set; }
 
-        public virtual ICollection<OrderCart> OrderCarts { get; set; }
         public virtual ICollection<User_has_film> User_has_films { get; set; }
 
     }

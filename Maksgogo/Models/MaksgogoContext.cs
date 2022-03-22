@@ -20,7 +20,6 @@ namespace Maksgogo
         public virtual DbSet<CartItem> CartItems { get; set; } = null!;
         public virtual DbSet<Film> Films { get; set; } = null!;
         public virtual DbSet<Genre> Genres { get; set; } = null!;
-        public virtual DbSet<OrderCart> OrderCarts { get; set; } = null!;
         public virtual DbSet<Studio> Studios { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<User_has_film> User_has_films { get; set; } = null!;
@@ -112,21 +111,7 @@ namespace Maksgogo
                     .HasColumnName("genre_name");
             });
 
-            modelBuilder.Entity<OrderCart>(entity =>
-            {
-                entity.HasKey(e => e.IdOrderCart);
-
-                entity.ToTable("OrderCart");
-
-                entity.Property(e => e.IdOrderCart).HasColumnName("idOrderCart");
-
-                entity.Property(e => e.IdUser).HasColumnName("idUser");
-
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.OrderCarts)
-                    .HasForeignKey(d => d.IdUser)
-                    .HasConstraintName("FK_OrderCart_User");
-            });
+            
 
             modelBuilder.Entity<Studio>(entity =>
             {

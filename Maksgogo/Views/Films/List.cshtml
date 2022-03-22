@@ -6,14 +6,7 @@
 
 <div class="row mt-5 mb-2">
 @{
-    foreach(var f in Model.getAllFilms)
-    {
-    <div class= "col-lg-3">
-        <img class="img-thumbnail" src="@f.Image" title="@f.Name"/>
-        <h3>Фільм: @f.Name</h3>
-        <p>Ціна: @f.Price.ToString()₴</p>
-        <p><a class= "btn btn-warning" href="#">Детальніше</a></p>
-    </div>
-    }
+    foreach(Film f in Model.getAllFilms)
+        @Html.Partial("_AllFilms", f)
 }
 </div>

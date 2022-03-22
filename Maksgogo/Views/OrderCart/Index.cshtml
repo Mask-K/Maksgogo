@@ -1,0 +1,23 @@
+﻿@model OrderCartViewModel
+
+
+<div class = "container">
+    @{
+        using (var context = new MaksgogoContext()) {
+            foreach (var el in Model.OrderCart.listCartItems)
+            {
+                Film f =  (from u in context.Films
+                         where u.IdFilm == el.IdFilm
+                         select u).First();
+
+                <div class = "alert alert-warning mt-3">
+                    <b>Фільм:</b> @f.Name<br/>
+                    <b>Ціна:</b> @f.Price.ToString()₴
+                </div>
+            }
+        }
+    }
+    <hr/>
+    <a class="btn btn-danger" asp-controller="Order" asp-action="CheckOut">Сплатити</a> 
+
+</div>

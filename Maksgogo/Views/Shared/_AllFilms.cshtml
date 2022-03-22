@@ -1,0 +1,8 @@
+﻿@model Film
+
+<div class= "col-lg-3">
+        <img class="img-thumbnail" src="@Model.Image" title="@Model.Name"/>
+        <h3>@Model.Name</h3>
+        <p>Ціна: @Model.Price.ToString()₴</p>
+        <p><a class= "btn btn-warning" href="#">Детальніше</a></p>
+    </div>
