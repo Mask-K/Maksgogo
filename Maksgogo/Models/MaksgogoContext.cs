@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Maksgogo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -22,6 +23,7 @@ namespace Maksgogo
         public virtual DbSet<OrderCart> OrderCarts { get; set; } = null!;
         public virtual DbSet<Studio> Studios { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<User_has_film> User_has_films { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -156,6 +158,25 @@ namespace Maksgogo
                     .HasColumnName("name");
 
                 entity.Property(e => e.Session).HasColumnName("session");
+            });
+
+            modelBuilder.Entity<User_has_film>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.ToTable("User_has_film");
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.IdUser).HasColumnName("idUser");
+                entity.Property(e => e.IdFilm).HasColumnName("idFilm");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.User_has_films)
+                    .HasForeignKey(d => d.IdUser)
+                    .HasConstraintName("FK_User_has_film_User");
+
+                entity.HasOne(d => d.IdFilmNavigation)
+                    .WithMany(p => p.User_has_films)
+                    .HasForeignKey(d => d.IdFilm)
+                    .HasConstraintName("FK_User_has_film_Film");
             });
 
             OnModelCreatingPartial(modelBuilder);

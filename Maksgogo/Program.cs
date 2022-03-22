@@ -1,7 +1,24 @@
+using Maksgogo;
+using Maksgogo.Interfaces;
+using Maksgogo.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//builder.Services.AddMvc();
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
+
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation();
+builder.Services.AddDbContext<MaksgogoContext>(option => option.UseSqlServer(
+       builder.Configuration.GetConnectionString("DefaultConnection")
+));
+
+builder.Services.AddTransient<IFilms, FilmRepository>();
+builder.Services.AddTransient<IGenres, GenreRepository>();
+builder.Services.AddTransient<IStudios, StudioRepository>();
 
 var app = builder.Build();
 
@@ -14,10 +31,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStatusCodePages();   
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseMvcWithDefaultRoute();
 app.UseAuthorization();
 
 app.MapControllerRoute(

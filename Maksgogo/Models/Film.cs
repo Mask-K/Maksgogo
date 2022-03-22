@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Maksgogo.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Maksgogo
@@ -8,6 +9,7 @@ namespace Maksgogo
         public Film()
         {
             CartItems = new HashSet<CartItem>();
+            User_has_films = new HashSet<User_has_film>();
         }
 
         public int IdFilm { get; set; }
@@ -25,5 +27,6 @@ namespace Maksgogo
         public virtual Genre? IdGenreNavigation { get; set; }
         public virtual Studio? IdStudioNavigation { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<User_has_film> User_has_films { get; set; }
     }
 }
