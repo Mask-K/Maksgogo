@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header class="w3-container w3-yellow w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">Maksgogo</h1>
+  <p class="w3-xlarge">Твій онлайн кінотеатр</p>
+  <a asp-area="" asp-controller="Films" asp-action="List"> <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top">Дивитись фільми</button> </a>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1>Фільми</h1>
+      <h5 class="w3-padding-32">Наша колекція містить багато фільмів з різних країн світу.</h5>
+
+      <p>Переваги нашого онлайн кінотеатру в тому, що ВСІ фільми мають дубляж українською мовою! Також,
+          є опція увімкнути англійські субтитри.
+      </p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <img width="180" height="180" src="~/img/camera-reels-fill.svg" alt="camera" />
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-orange w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+      <img width="180" height="180" src="~/img/badge-4k-fill.svg" alt="camera" />
+    </div>
+
+    <div class="w3-twothird w3-text-white">
+      <h1>Якість відео</h1>
+      <h5 class="w3-padding-32">Усі фільми мають роздільну здатність 4k.</h5>
+
+      <p class="w3-text-white">Якщо Ви бажаєте відчути ностальгію, то можете за додаткову оплату дивитись фільми в роздільній здатності 360p</p>
+    </div>
+  </div>
+</div>
+
+
+<h1 class="w3-margin w3-jumbo w3-center">Персонал</h1>
+
+<div class="row">
+  <div class="col">
+    <img src="http://pm1.narvii.com/6515/7dd198c96e38bdd2add76de9645c0c5d590641d1_00.jpg" alt="Person">
+    <div class="w3-container">
+      <h4><b>Ервін</b></h4>
+      <p>Головнокомандувач</p>
+    </div>
+  </div>
+  <div class="col">
+    <img src="https://www.w3schools.com/w3css/img_avatar1.png" alt="Person">
+    <div class="w3-container">
+      <h4><b>Mask</b></h4>
+      <p>Дизайнер та логіст</p>
+    </div>
+  </div>
+  <div class="col">
+    <img src="https://www.w3schools.com/w3css/img_avatar2.png" alt="Person">
+    <div class="w3-container">
+      <h4><b>Stets</b></h4>
+      <p>Тестер</p>
+    </div>
+  </div>
+  <div class="col">
+    <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Person">
+    <div class="w3-container">
+      <h4><b>Proh</b></h4>
+      <p>Креатолог, ком'юніті менеджер</p>
+    </div>
+  </div>
+</div>

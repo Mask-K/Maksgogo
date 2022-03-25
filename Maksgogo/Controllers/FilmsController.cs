@@ -27,5 +27,14 @@ namespace Maksgogo.Controllers
             //obj.CurrStudio = "Sony";
             return View(obj);
         }
+
+        public ViewResult BestFilms()
+        {
+            BestFilmsViewModel obj = new BestFilmsViewModel();
+            obj.BestFilms = from f in _allFilms.AllFilms
+                            where f.IsFav == true
+                            select f;
+            return View(obj);
+        }
     }
 }

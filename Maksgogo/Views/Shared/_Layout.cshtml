@@ -4,11 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] Maksgogo</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Maksgogo.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Style.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 </head>
 <body>
@@ -22,14 +25,15 @@
     <header class="p-3 bg-dark text-white">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a asp-area="" asp-controller="Home" asp-action="Index">
+        <a asp-area="" asp-controller="Home" asp-action="Home">
             <img width="40" height="32" src="~/img/letterM.svg" alt="M" />
         </a>    
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Home" asp-action="Index"><strong>Home</strong></a></li>
+          <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Home" asp-action="Home"><strong>Home</strong></a></li>
           <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="List">All Films</a></li>
+          <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="BestFilms">Best Films</a></li>
           <li><a  class="nav-link px-2 text-white" asp-area="" asp-controller="OrderCart" asp-action="Index">Корзина</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a  class="nav-link px-2 text-white" asp-area="" asp-controller="Home" asp-action="FAQ">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 
@@ -53,10 +57,13 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - Maksgogo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a href="https://www.facebook.com/profile.php?id=100011180945145" target="_blank"><img width="40" height="40" src="https://kino-butterfly.com.ua/img/fb_icon.png" ></a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><img width="40" height="40" src="https://kino-butterfly.com.ua/img/youtube_icon.png"></a>
+            <a href="https://t.me/maskly" target="_blank"><img width="40" height="40" src="https://kino-butterfly.com.ua/img/telegram_icon.png"></a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
     window.onload = function () {

@@ -1,0 +1,10 @@
+﻿@model BestFilmsViewModel
+
+<h1>Best Films</h1>
+
+<div class="row mt-5 mb-2">
+@{
+    foreach(Film f in Model.BestFilms)
+        @Html.Partial("_AllFilms", f)
+}
+</div>

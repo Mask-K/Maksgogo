@@ -13,7 +13,11 @@ namespace Maksgogo.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Home()
+        {
+            return View();
+        }
+        public IActionResult FAQ()
         {
             return View();
         }
