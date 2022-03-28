@@ -6,32 +6,70 @@ namespace Maksgogo.Controllers
 {
     public class FilmsController : Controller
     {
-        private readonly IGenres _allGenres;
-        private readonly IStudios _allStudios;
+        
         private readonly IFilms _allFilms;
 
 
-        public FilmsController(IFilms allFilms, IGenres allGenres, IStudios allStudios)
+        public FilmsController(IFilms allFilms)
         {
             _allFilms = allFilms;
-            _allGenres = allGenres;
-            _allStudios = allStudios;
+            
         }
 
-
-        public ViewResult List()
+        [Route("Films/List")]
+       
+        public IActionResult List()
         {
             FilmListViewModel obj = new FilmListViewModel();
             obj.getAllFilms = _allFilms.AllFilms;
-            //obj.CurrGenre = "супергеройський";
-            //obj.CurrStudio = "Sony";
+            
+            return View(obj);
+        }
+        public IActionResult Search()
+        {
+            FilmListViewModel obj = new FilmListViewModel();
+            obj.getAllFilms = _allFilms.AllFilms;
+            
             return View(obj);
         }
 
-        public ViewResult BestFilms()
+        public PartialViewResult SearchFilms(string searchtext, string id)
         {
-            BestFilmsViewModel obj = new BestFilmsViewModel();
-            obj.BestFilms = from f in _allFilms.AllFilms
+            var obj = new FilmListViewModel();
+            try
+            {
+                if (int.Parse(id) == 1)
+                {
+                    obj.getAllFilms = from f in _allFilms.AllFilms
+                                      where f.Name.ToLower().Contains(searchtext?.ToLower())
+                                      select f;
+                }
+                else if (int.Parse(id) == 2)
+                {
+                    var context = new MaksgogoContext();
+                    obj.getAllFilms = from f in _allFilms.AllFilms
+                                      join c in context.Genres on f.IdGenre equals c.IdGenre
+                                      where c.GenreName.ToLower().Contains(searchtext?.ToLower())
+                                      select f;
+                }
+                else
+                {
+                    var context = new MaksgogoContext();
+                    obj.getAllFilms = from f in _allFilms.AllFilms
+                                      join c in context.Studios on f.IdStudio equals c.IdStudio
+                                      where c.StudioName.ToLower().Contains(searchtext?.ToLower())
+                                      select f;
+                }
+            }
+            catch (Exception ex) { }
+            return PartialView("_GridView", obj);
+            
+        }
+
+        public IActionResult BestFilms()
+        {
+            var obj = new FilmListViewModel();
+            obj.getAllFilms = from f in _allFilms.AllFilms
                             where f.IsFav == true
                             select f;
             return View(obj);

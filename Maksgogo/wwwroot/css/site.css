@@ -124,3 +124,13 @@ svg{
     }
 }
 
+.search-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.film-cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill);
+}

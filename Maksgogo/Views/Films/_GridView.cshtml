@@ -1,0 +1,34 @@
+﻿@model FilmListViewModel
+
+<div class= "col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Img</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.getAllFilms.Count() != 0)
+                    {
+                        foreach(Film f in Model.getAllFilms){
+                                 <tr>
+                                    <td><img width="140" height="132" class="img-thumbnail" src="@f.Image" alt="@f.Name"/></td>
+                                    <td><h3>@f.Name</h3></td>
+                                    <td><p>Ціна: @f.Price.ToString()₴</p></td>
+                                    <td><p><a class= "btn btn-warning" href="#">Детальніше</a></p></td>
+                                </tr>
+                }
+            }
+            else
+            {
+                <tr>Фільм не знайдено</tr>
+            }
+
+                </tbody>
+            </table>
+            
+        </div>
+
