@@ -33,6 +33,7 @@ namespace Maksgogo.Controllers
             return View(obj);
         }
 
+
         public PartialViewResult SearchFilms(string searchtext, string id)
         {
             var obj = new FilmListViewModel();

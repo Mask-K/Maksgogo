@@ -4,5 +4,37 @@
         <img class="img-thumbnail" src="@Model.Image" title="@Model.Name"/>
         <h3>@Model.Name</h3>
         <p>Ціна: @Model.Price.ToString()₴</p>
-        <p><a class= "btn btn-warning" href="#">Детальніше</a></p>
+        <p><a class="btn btn-warning">Купити</a></p>
+        <p><a class="btn btn-warning" data-bs-toggle="modal" data-bs-target = "#descrModal">Детальніше</a></p>
+</div>
+
+<div class="modal fade" id="descrModal" tabindex="-1" aria-bs-labelledby= "descrModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="descrModalLabel">@Model.Name</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-bs-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                         <img height = "100" width= "100" class="img-thumbnail" src="@Model.Image" title="@Model.Name"/>
+                    </div>
+                    <div class="col">
+                         <p>Країна випуску: @Model.Country</p>
+                         <p>@Model.Descr</p>
+                         <p>Дата релізу: @Model.ReleaseDate</p>
+                    </div>
+                </div>
+               
+                
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
     </div>
+
+</div>
+

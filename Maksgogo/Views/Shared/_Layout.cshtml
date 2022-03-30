@@ -32,10 +32,13 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Home" asp-action="Home"><strong>Головна</strong></a></li>
           <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="List">Всі фільми</a></li>
-          <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="Search">Пошук</a></li>
           <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="BestFilms">Найкращі фільми</a></li>
           <li><a  class="nav-link px-2 text-white" asp-area="" asp-controller="OrderCart" asp-action="Index">Корзина</a></li>
           <li><a  class="nav-link px-2 text-white" asp-area="" asp-controller="Home" asp-action="FAQ">FAQs</a></li>
+        </ul>
+
+        <ul class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <li class="nav-item"><a class="nav-link px-2 text-white" asp-area="" asp-controller="Films" asp-action="Search">Пошук</a></li>
         </ul>
 
         <div class="text-end">
@@ -74,7 +77,7 @@
      }
     </script>
 
-    <script>
+  <script>
     $(() => {
         getFilms();
 
@@ -99,7 +102,8 @@
 
         })
     }
-</script>
+  </script>
+
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
