@@ -7,6 +7,7 @@
                         <th>Img</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,6 +18,8 @@
                                     <td><img width="140" height="132" class="img-thumbnail" src="@f.Image" alt="@f.Name"/></td>
                                     <td><h3>@f.Name</h3></td>
                                     <td><p>Ціна: @f.Price.ToString()₴</p></td>
+                                    <td><p><a class="btn btn-warning" asp-controller="OrderCart" asp-action="AddToCart" asp-route-filmId="@f.IdFilm">Купити</a></p></td>
+
                                 </tr>
                 }
             }

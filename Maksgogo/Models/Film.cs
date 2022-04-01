@@ -10,6 +10,7 @@ namespace Maksgogo
         {
             CartItems = new HashSet<CartItem>();
             User_has_films = new HashSet<User_has_film>();
+            OrderInfos = new HashSet<OrderInfo>();
         }
 
         public int IdFilm { get; set; }
@@ -27,6 +28,7 @@ namespace Maksgogo
         public virtual Genre? IdGenreNavigation { get; set; }
         public virtual Studio? IdStudioNavigation { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<OrderInfo> OrderInfos { get; set; }
         public virtual ICollection<User_has_film> User_has_films { get; set; }
     }
 }

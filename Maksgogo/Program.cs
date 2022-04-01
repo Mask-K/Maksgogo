@@ -19,6 +19,7 @@ builder.Services.AddDbContext<MaksgogoContext>(option => option.UseSqlServer(
 builder.Services.AddTransient<IFilms, FilmRepository>();
 builder.Services.AddTransient<IGenres, GenreRepository>();
 builder.Services.AddTransient<IStudios, StudioRepository>();
+builder.Services.AddTransient<IOrders, OrderRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => OrderCart.GetCart(sp));

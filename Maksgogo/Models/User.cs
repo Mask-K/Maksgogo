@@ -9,6 +9,7 @@ namespace Maksgogo
         public User()
         {
             User_has_films = new HashSet<User_has_film>();
+            Order = new HashSet<Order>();
 
         }
 
@@ -18,6 +19,6 @@ namespace Maksgogo
         public string? Session { get; set; }
 
         public virtual ICollection<User_has_film> User_has_films { get; set; }
-
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

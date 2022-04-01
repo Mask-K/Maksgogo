@@ -34,10 +34,10 @@ namespace Maksgogo.Controllers
         public RedirectToActionResult AddToCart(int filmId)
         {
             var item = _filmRep.AllFilms.FirstOrDefault(i => i.IdFilm == filmId);
-            if (item != null)
-            {
+            if (item != null && (_orderCart.GetItems().Count() == 0 || _orderCart.GetItems().Where(x => x.IdFilm == filmId).Count() == 0))
                 _orderCart.AddToCart(item);
-            }
+            
+
             return RedirectToAction("Index");
         }
 

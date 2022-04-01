@@ -4,7 +4,7 @@
         <img class="img-thumbnail" src="@Model.Image" title="@Model.Name"/>
         <h3>@Model.Name</h3>
         <p>Ціна: @Model.Price.ToString()₴</p>
-        <p><a class="btn btn-warning">Купити</a></p>
+        <p><a class="btn btn-warning" asp-controller="OrderCart" asp-action="AddToCart" asp-route-filmId="@Model.IdFilm">Купити</a></p>
         <p><a class="btn btn-warning" data-bs-toggle="modal" data-bs-target = "#descrModal">Детальніше</a></p>
 </div>
 

@@ -22,7 +22,10 @@ namespace Maksgogo
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<Studio> Studios { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderInfo> OrderInfos { get; set; } = null!;
         public virtual DbSet<User_has_film> User_has_films { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -143,6 +146,40 @@ namespace Maksgogo
                     .HasColumnName("name");
 
                 entity.Property(e => e.Session).HasColumnName("session");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(e => e.IdOrder);
+                entity.ToTable("Order");
+                entity.Property(e => e.IdOrder).HasColumnName("idOrder");
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.HasOne(d => d.idUserNavigation)
+                    .WithMany(p => p.Order)
+                    .HasForeignKey(d => d.IdUser)
+                    .HasConstraintName("FK_Order_User");
+            });
+
+            modelBuilder.Entity<OrderInfo>(entity =>
+            {
+                entity.HasKey(e => e.IdOrderInfo);
+                entity.ToTable("OrderInfo");
+                entity.Property(e => e.IdOrderInfo).HasColumnName("idOrderInfo");
+                entity.HasOne(d => d.IdOrderNavigation)
+                    .WithMany(p => p.OrderInfos)
+                    .HasForeignKey(d => d.IdOrder)
+                    .HasConstraintName("FK_OrderInfo_Order");
+                entity.HasOne(d => d.IdFilmNavigation)
+                    .WithMany(p => p.OrderInfos)
+                    .HasForeignKey(d => d.IdFilm)
+                    .HasConstraintName("FK_OrderInfo_Film");
             });
 
             modelBuilder.Entity<User_has_film>(entity =>
