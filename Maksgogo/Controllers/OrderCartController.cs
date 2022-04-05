@@ -16,7 +16,7 @@ namespace Maksgogo.Controllers
             _orderCart = orderCart;
         }
 
-        public ViewResult Index()
+        public IActionResult Index()
         {
             var items = _orderCart.GetItems();
             _orderCart.listCartItems = items;
@@ -25,9 +25,15 @@ namespace Maksgogo.Controllers
             {
                 OrderCart = this._orderCart,
             };
-
-            
-
+            if(_orderCart.listCartItems.Count == 0)
+            {
+                return RedirectToAction("Error", "Order", new RouteValueDictionary(new
+                {
+                    action = "ErrorOrder",
+                    controller = "Order",
+                    error = "Пусто..."
+                }));
+            }
             return View(obj);
         }
 

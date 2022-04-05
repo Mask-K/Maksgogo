@@ -41,5 +41,19 @@ namespace Maksgogo
             return _context.CartItems.Where(c => c.Session == this.Session).ToList();
         }
 
+        public void Clear()
+        {
+            var items = new List<CartItem>();
+
+            items = _context.CartItems.Where(c => c.Session == Session).ToList();
+
+            foreach (var i in items)
+            {
+                _context.CartItems.Remove(i);
+            }
+            _context.SaveChanges();
+            this.listCartItems.Clear();
+        }
+
     }
 }

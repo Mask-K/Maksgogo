@@ -33,7 +33,9 @@ namespace Maksgogo.Repositories
                 _context.SaveChanges();
 
             }
-            //_context.SaveChanges();
+            _orderCart.Clear();
         }
+
+        
     }
 }

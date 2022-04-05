@@ -25,10 +25,7 @@ namespace Maksgogo.Controllers
         public IActionResult CheckOut(Order order)
         {
             _orderCart.listCartItems = _orderCart.GetItems();
-            if(_orderCart.listCartItems.Count == 0)
-            {
-                ModelState.AddModelError("", "Немає товарів");
-            }
+            
             if (ModelState.IsValid)
             {
                 _orders.CreateOrder(order);
@@ -40,6 +37,12 @@ namespace Maksgogo.Controllers
         public IActionResult Complete()
         {
             ViewBag.Mess = "Фільми успішно куплено! Гарного перегляду!";
+            return View();
+        }
+
+        public IActionResult Error(string error)
+        {
+            ViewBag.Message = error;
             return View();
         }
     }
