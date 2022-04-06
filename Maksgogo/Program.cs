@@ -1,7 +1,10 @@
 using Maksgogo;
 using Maksgogo.Interfaces;
+using Maksgogo.Models;
 using Maksgogo.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,12 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<MaksgogoContext>(option => option.UseSqlServer(
        builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+builder.Services.AddDbContext<IdentityContext>(option => option.UseSqlServer(
+    builder.Configuration.GetConnectionString("IdentityConnection")
+));
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
 builder.Services.AddTransient<IFilms, FilmRepository>();
 builder.Services.AddTransient<IGenres, GenreRepository>();
@@ -42,6 +51,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStatusCodePages();   
 app.UseStaticFiles();
+app.UseAuthentication();
+
 app.UseRouting();
 app.UseSession();
 app.UseMvcWithDefaultRoute();
@@ -51,5 +62,4 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Home}/{id?}");
-
 app.Run();

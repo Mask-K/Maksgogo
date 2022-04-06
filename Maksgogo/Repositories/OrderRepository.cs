@@ -29,8 +29,18 @@ namespace Maksgogo.Repositories
                     IdFilm = (int)i.IdFilm,
                     IdOrder = realOrder.IdOrder
                 };
+
+                var user_has_film = new User_has_film()
+                {
+                    IdFilm = (int)i.IdFilm,
+                    Username = realOrder.Name
+                };
+
                 _context.OrderInfos.Add(info);
+                _context.User_has_films.Add(user_has_film);
                 _context.SaveChanges();
+
+                
 
             }
             _orderCart.Clear();

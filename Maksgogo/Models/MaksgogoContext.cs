@@ -21,7 +21,6 @@ namespace Maksgogo
         public virtual DbSet<Film> Films { get; set; } = null!;
         public virtual DbSet<Genre> Genres { get; set; } = null!;
         public virtual DbSet<Studio> Studios { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderInfo> OrderInfos { get; set; } = null!;
         public virtual DbSet<User_has_film> User_has_films { get; set; } = null!;
@@ -63,6 +62,7 @@ namespace Maksgogo
                 entity.Property(e => e.IdFilm).HasColumnName("idFilm");
 
                 entity.Property(e => e.AmountBougth).HasColumnName("amountBougth");
+                entity.Property(e => e.Href).HasColumnName("href");
 
                 entity.Property(e => e.Country)
                     .HasMaxLength(50)
@@ -129,24 +129,7 @@ namespace Maksgogo
                     .HasColumnName("studio_name");
             });
 
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasKey(e => e.IdUser);
-
-                entity.ToTable("User");
-
-                entity.Property(e => e.IdUser).HasColumnName("idUser");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(50)
-                    .HasColumnName("email");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
-
-                entity.Property(e => e.Session).HasColumnName("session");
-            });
+            
 
             modelBuilder.Entity<Order>(entity =>
             {
@@ -160,11 +143,6 @@ namespace Maksgogo
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .HasColumnName("name");
-
-                entity.HasOne(d => d.idUserNavigation)
-                    .WithMany(p => p.Order)
-                    .HasForeignKey(d => d.IdUser)
-                    .HasConstraintName("FK_Order_User");
             });
 
             modelBuilder.Entity<OrderInfo>(entity =>
@@ -187,13 +165,9 @@ namespace Maksgogo
                 entity.HasKey(e => e.Id);
                 entity.ToTable("User_has_film");
                 entity.Property(e => e.Id).HasColumnName("id");
-                entity.Property(e => e.IdUser).HasColumnName("idUser");
                 entity.Property(e => e.IdFilm).HasColumnName("idFilm");
+                entity.Property(e => e.Username).HasColumnName("username");
 
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.User_has_films)
-                    .HasForeignKey(d => d.IdUser)
-                    .HasConstraintName("FK_User_has_film_User");
 
                 entity.HasOne(d => d.IdFilmNavigation)
                     .WithMany(p => p.User_has_films)

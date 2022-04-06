@@ -1,5 +1,6 @@
 ﻿using Maksgogo.Interfaces;
 using Maksgogo.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maksgogo.Controllers
@@ -8,31 +9,47 @@ namespace Maksgogo.Controllers
     {
         private readonly IOrders _orders;
         private readonly OrderCart _orderCart;
+        private readonly UserManager<User> _userManager;
 
-        public OrderController(IOrders orders, OrderCart orderCart)
+        public OrderController(IOrders orders, OrderCart orderCart, UserManager<User> userManager)
         {
             _orders = orders;
             _orderCart = orderCart;
+            _userManager = userManager;
         }
 
-        public IActionResult CheckOut()
+        public async Task<IActionResult> CheckOut()
         {
             _orderCart.listCartItems = _orderCart.GetItems();
-            return View();
+            Order order = new Order();
+            if (ModelState.IsValid)
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var curr_user = await _userManager.GetUserAsync(User);
+                    order.Name = curr_user.UserName;
+                    order.Email = curr_user.Email;
+                    _orders.CreateOrder(order);
+                    return RedirectToAction("Complete");
+                }
+                return RedirectToAction("Error", "Order", new RouteValueDictionary(new
+                {
+                    action = "ErrorOrder",
+                    controller = "Order",
+                    error = "Увійдіть в акаунт для покупки!"
+                }));
+
+            }
+            return View(order);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult CheckOut(Order order)
         {
             _orderCart.listCartItems = _orderCart.GetItems();
             
-            if (ModelState.IsValid)
-            {
-                _orders.CreateOrder(order);
-                return RedirectToAction("Complete");
-            }
-            return View(order);
-        }
+            
+        }*/
 
         public IActionResult Complete()
         {

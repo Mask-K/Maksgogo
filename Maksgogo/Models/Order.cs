@@ -23,10 +23,10 @@ namespace Maksgogo.Models
         [ScaffoldColumn(false)]
         public DateTime OrderTime { get; set; }
 
-        public int? IdUser { get; set; }
+        //public int? IdUser { get; set; }
 
 
-        public virtual User? idUserNavigation { get; set; }
+        //public virtual User? idUserNavigation { get; set; }
         public virtual ICollection<OrderInfo> OrderInfos { get; set; }
 
     }

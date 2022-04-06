@@ -1,5 +1,7 @@
 ﻿using Maksgogo.Interfaces;
+using Maksgogo.Models;
 using Maksgogo.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maksgogo.Controllers
@@ -8,12 +10,14 @@ namespace Maksgogo.Controllers
     {
         
         private readonly IFilms _allFilms;
+        private readonly MaksgogoContext _context;
+        private readonly UserManager<User> _userManager;
 
-
-        public FilmsController(IFilms allFilms)
+        public FilmsController(IFilms allFilms, MaksgogoContext context, UserManager<User> userManager)
         {
             _allFilms = allFilms;
-            
+            _context = context;
+            _userManager = userManager;
         }
 
         [Route("Films/List")]
@@ -73,6 +77,21 @@ namespace Maksgogo.Controllers
             obj.getAllFilms = from f in _allFilms.AllFilms
                             where f.IsFav == true
                             select f;
+            return View(obj);
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            var obj = new FilmListViewModel();
+            var curr_user = await _userManager.GetUserAsync(User);
+            var userFilms = from f in _context.User_has_films
+                            where f.Username == curr_user.UserName
+                            select f.IdFilm;
+
+
+            obj.getAllFilms = from f in _allFilms.AllFilms
+                              where userFilms.Contains(f.IdFilm)
+                              select f;
             return View(obj);
         }
     }

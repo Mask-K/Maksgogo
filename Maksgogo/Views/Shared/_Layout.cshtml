@@ -43,8 +43,22 @@
         </ul>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+            @if (User.Identity.IsAuthenticated){
+                        <div class="row">
+                            <div class="col">
+                                <a class="btn btn-outline-light me-2" asp-controller="Films" asp-action="Profile">Профіль</a>
+                            </div>
+                        <div class="col">
+                        <form method="post" asp-controller="Account" asp-action="Logout">
+                            <input type="submit" class="btn btn-warning" value="Вийди"/>
+                        </form>
+                        </div>
+                        </div>
+                    }
+            else{
+                         <a class="btn btn-outline-light me-2" asp-controller="Account" asp-action="Login">Login</a>
+                        <a  class="btn btn-warning" asp-controller="Account" asp-action="Register">Sign-up</a>
+                    }
         </div>
       </div>
     </div>

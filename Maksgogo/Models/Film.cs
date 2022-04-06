@@ -25,6 +25,8 @@ namespace Maksgogo
         public bool? IsFav { get; set; }
         public int? AmountBougth { get; set; }
 
+        public string Href { get; set; }
+
         public virtual Genre? IdGenreNavigation { get; set; }
         public virtual Studio? IdStudioNavigation { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
