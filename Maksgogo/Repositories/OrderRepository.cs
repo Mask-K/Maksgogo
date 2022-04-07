@@ -35,10 +35,13 @@ namespace Maksgogo.Repositories
                     IdFilm = (int)i.IdFilm,
                     Username = realOrder.Name
                 };
-
                 _context.OrderInfos.Add(info);
                 _context.User_has_films.Add(user_has_film);
+                _context.Films.First(x => x.IdFilm == i.IdFilm).AmountBougth+=1;
+
                 _context.SaveChanges();
+
+
 
                 
 

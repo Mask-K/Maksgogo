@@ -1,7 +1,11 @@
 ﻿
-
-<div class="container">
+<div class="row">
+<div class="col">
     <div id="chart1"></div>
+</div>
+<div class="col">
+    <div id="chart2"></div>
+</div>
 </div>
 
 @section scripts{
@@ -20,6 +24,24 @@
                     height: 400
                 };
                 chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+    <script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            $.get('/api/Chart/Films', function(Films) {
+                data = google.visualization.arrayToDataTable(Films, false);
+                var option = {
+                    title: "Співвідношення фільмів та кількості його покупок",
+                    width: 500,
+                    height: 400
+                };
+                chart = new google.visualization.PieChart(document.getElementById('chart2'));
                 chart.draw(data, option);
             })
         }

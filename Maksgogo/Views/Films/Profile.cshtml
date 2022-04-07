@@ -6,6 +6,10 @@
 <div class="row mt-5 mb-2">
     <div></div>
 @{
+        if (Model.getAllFilms.Count() < 1)
+        {
+            <p>Ви не купили ще жодного фільму для перегляду!</p>
+        }
         foreach(Film f in Model.getAllFilms)
         {
             

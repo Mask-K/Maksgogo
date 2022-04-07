@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Maksgogo.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maksgogo.Controllers
@@ -8,6 +9,7 @@ namespace Maksgogo.Controllers
     public class ChartController : ControllerBase
     {
         private readonly MaksgogoContext _context;
+
 
         public ChartController(MaksgogoContext maksgogo)
         {
@@ -27,6 +29,19 @@ namespace Maksgogo.Controllers
             }
 
             return new JsonResult(genFilms);
+        }
+
+        [HttpGet("Films")]
+
+        public JsonResult Films()
+        {
+            List<object> filmsBuy = new List<object>();
+            filmsBuy.Add(new[] { "Фільм", "Кількість покупок" });
+            foreach (var u in _context.Films)
+                filmsBuy.Add(new object[] {u.Name, u.AmountBougth});
+
+            return new JsonResult(filmsBuy);
+
         }
     }
 }
