@@ -94,5 +94,14 @@ namespace Maksgogo.Controllers
                               select f;
             return View(obj);
         }
+
+        public IActionResult Excel()
+        {
+            return View();
+        }
+
+
+        
+
     }
 }
