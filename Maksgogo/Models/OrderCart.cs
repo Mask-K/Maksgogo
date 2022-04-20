@@ -1,16 +1,18 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Maksgogo
 {
     public partial class OrderCart
     {
         private readonly MaksgogoContext _context;
-
-        public OrderCart(MaksgogoContext context)
+        private readonly IHttpContextAccessor httpContextAccessor;
+        public OrderCart(MaksgogoContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public string Session { get; set; }
@@ -20,10 +22,11 @@ namespace Maksgogo
         {
             ISession _session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = services.GetService<MaksgogoContext>();
+            var httpContext = services.GetService<IHttpContextAccessor>();
             string __session = _session.GetString("CartId")?? Guid.NewGuid().ToString();
 
             _session.SetString("CartId", __session);
-            return new OrderCart(context) { Session = __session };
+            return new OrderCart(context, httpContext) { Session = __session };
         }
 
         public void AddToCart(Film film)
@@ -53,6 +56,16 @@ namespace Maksgogo
             }
             _context.SaveChanges();
             this.listCartItems.Clear();
+        }
+
+        public void DeleteItem(string name)
+        {
+            var film = _context.Films.FirstOrDefault(i => i.Name == name).IdFilm;
+
+            var temp = _context.CartItems.FirstOrDefault(i => i.IdFilm == film && i.Session == Session);
+            _context.CartItems.Remove(temp);
+            _context.SaveChanges();
+
         }
 
     }

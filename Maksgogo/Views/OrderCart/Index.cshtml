@@ -12,9 +12,20 @@
                          select u).First();
 
                 <div class = "alert alert-warning mt-3">
+                    <div class="row">
+                    <div class="col">
                     <b>Фільм:</b> @f.Name<br/>
                     <b>Ціна:</b> @f.Price.ToString()₴
+                    </div>
+                    <div class="col">
+                    <div class="text-end">
+                    <a class="btn btn-outline-warning" style="element-aligh=right;" asp-controller="OrderCart" asp-action="DeleteItem"
+                            asp-route-name="@f.Name">Видалити</a>
+                    </div>
+                    </div>
+                    </div>
                 </div>
+                
                 sum += (int)@f.Price;
             }
             <strong>Всього до сплати: @sum.ToString()₴</strong>

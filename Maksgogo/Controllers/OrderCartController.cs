@@ -76,5 +76,13 @@ namespace Maksgogo.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult DeleteItem(string name)
+        {
+            _orderCart.DeleteItem(name);
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
